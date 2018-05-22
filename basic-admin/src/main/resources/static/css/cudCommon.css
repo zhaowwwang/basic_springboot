@@ -1,0 +1,21 @@
+
+.div-info-main { width: 90%; padding: 20px; margin: 2px auto; border: solid 1px #eee;}
+.div-info-tit { color: #000; position: relative; padding-left: 15px; font-size: 16px; margin-bottom: 15px;}
+.div-info-tit:before { content:""; width:3px; height: 20px; background-color: rgba(55, 127, 235, 0.781); position: absolute; top: 50%; left: 0; margin-top: -10px; }
+.div-info-table {width: 100%; margin-bottom: 15px;line-height: 24px;font-size: 12px;}
+.div-info-table th{ padding: 8px; font-weight: normal; text-align: right; border: solid 1px #e0e0e0; background-color: #f4f4f4;font-size: 14px;}
+.div-info-table td{ padding: 8px; text-align: left; border: solid 1px #e0e0e0;}
+.div-info-table.t-c th {text-align: center;}
+.div-info-table.t-c td {text-align: center;}
+.div-info-table.t-c img {max-width: 100%; height: auto;}
+.div-info-table input { border: solid 1px #e0e0e0; line-height: 24px; min-width: 200px;}
+.div-info-main a{ display: inline-block; width: 60px; height: 30px; line-height: 30px; border-radius: 5px; text-align: center; text-decoration: none;  }
+.div-info-main a.confirm{ background: #2A3F54; color: #fff;margin-left:80%;}
+
+.file{ position:relative; overflow:hidden; height: 5rem; border: dashed 1px #ddd; border-radius: 0.08rem; /* margin: 0 2% 0.15rem;*/ margin: 0.1rem; }
+.file input[type="file"]{width:100%; height: 100%; position:absolute; top:0; left: 0;color:#fff; font-size:2rem; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; text-indent:-20rem; z-index: 1; }
+.file-show{ background-color: #fff; height: 5rem; vertical-align: middle; box-sizing: border-box; position: relative; z-index: 0; font-size: 0.2rem; text-align:center; }
+.file-show:before { content: ""; width: 0.04rem; height: 1rem; background-color: #eee; position: absolute; top: 50%; left: 50%; margin-top: -0.7rem; margin-left: -0.02rem; }
+.file-show:after { content: ""; width: 1rem; height: 0.04rem; background-color: #eee; position: absolute; top: 50%; left: 50%; margin-top: -0.22rem; margin-left: -0.5rem; }
+.file-show em { color: #ccc; position: absolute; bottom: 0.2rem; left: 0; right: 0; }
+.file-show img { position: relative; z-index: 1;}

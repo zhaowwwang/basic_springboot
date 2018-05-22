@@ -26,7 +26,6 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +39,6 @@ import java.util.Map;
  * @version: 1.0
  * @date: 2017/11/15 17:15
  */
-@Component
 public class HttpClientUtils {
 
     private static Logger logger = LoggerFactory.getLogger(HttpClientUtils.class);

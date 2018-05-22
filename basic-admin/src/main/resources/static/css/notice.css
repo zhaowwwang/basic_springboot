@@ -1,0 +1,68 @@
+.release li {
+    height: 32px;
+    line-height: 32px;
+    margin: 20px 0;
+}
+
+.release li span {
+    display: block;
+    float: left;
+    font-size: 12px;
+    color: #555;
+    width: 50px;
+    text-align: right;
+}
+
+.release li label input {
+    vertical-align: middle;
+    margin-top: -3px;
+}
+
+.inp {
+    height: 28px;
+    font-size: 12px;
+    color: #555;
+    border: 1px solid #E6E9ED;
+    outline: none;
+    padding-left: 10px;
+    width: 200px;
+    line-height: 28px;
+}
+
+.release li.texts {
+    height: 105px;
+    line-height: 13px;
+}
+
+.release li textarea {
+    width: 206px;
+    height: 100px;
+    border: 1px solid #E6E9ED;
+    color: #ccc;
+    outline: none;
+    resize: none;
+    text-indent: 8px;
+    padding: 5px;
+}
+
+#che1,
+#che2 {
+    vertical-align: sub;
+}
+
+.determine {
+    margin: 0 auto 15px;
+    width: 88px;
+}
+
+.determine span {
+    display: block;
+    width: 88px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    background: #26B99A;
+    cursor: pointer;
+}

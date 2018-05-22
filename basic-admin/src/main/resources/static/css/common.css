@@ -1,0 +1,404 @@
+@charset "utf-8";
+body {
+    margin: 0;
+    padding: 0;
+    background: #F7F7F7;
+    -webkit-touch-action: manipulation;
+    -moz-touch-action: manipulation;
+    -ms-touch-action: manipulation;
+    -o-touch-action: manipulation;
+    touch-action: manipulation;
+/*    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;*/
+}
+
+body, input, button, textarea, select, option, label { font-family: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", '\5FAE\8F6F\96C5\9ED1', '\5B8B\4F53,\9ED1\4F53', sans-self; }
+em, i, b, strong { font-size: 100%; font-style: normal; font-weight: normal; }
+button::-moz-focus-inner, input::-moz-focus-inner { padding:0; border:0; }
+input, button, textarea, select, label, form { margin: 0; padding: 0; border: none; font-size: 100%; outline: none; }
+input, select { vertical-align: middle; }
+.clearfix:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+/*蒙版*/
+.mengban {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .4);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#7f0000, endColorstr=#7f0000);
+    display: none;
+    z-index: 101;
+}
+
+
+/*退出*/
+.quitCon {
+    width: 350px;
+    height: 200px;
+    background: #fff;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 102;
+    margin-left: -175px;
+    margin-top: -100px;
+    display: none;
+}
+
+.quitCon p {
+    text-align: center;
+    font-size: 16px;
+    color: #56585b;
+    padding-top: 60px;
+}
+
+
+/*内容*/
+.maincon {
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+}
+
+/*右侧*/
+.mainRight {
+    width: 87.5%;
+    padding: 10px 8px 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 12%;
+    min-width: 1000px;
+    box-sizing: border-box;
+}
+
+
+/*右侧内容区*/
+.mainList {
+    width: 99%;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    padding: 1px 4px;
+    position: relative;
+}
+
+
+/*title*/
+.top {
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 10px;
+    position: relative;
+}
+
+.top span {
+    color: #73879C;
+}
+
+.top .inventory {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    cursor: pointer;
+    background: #26B99A;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.top em {
+    margin: 0 10px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.top .qiDetail {
+    color: #545454;
+}
+
+
+/*添加项目*/
+.uls {
+    float: right;
+    height: 47px;
+}
+
+.uls li {
+    float: left;
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #555;
+    background: #F3F3F3;
+    border: 1px solid #E6E9ED;
+    margin: 10px 5px 10px 0;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.uls li.default {
+    color: #fff;
+    background: #337ab7;
+    border: 1px solid #337ab7;
+}
+
+.uls li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+/* 查询条件 */
+.detailedQw {
+    overflow: hidden;
+    margin-top: 10px;
+    float: left;
+    margin-left: 2px;
+}
+
+.detailedQw li {
+    float: left;
+    margin-right: 9px;
+}
+
+.detailedQw li input{
+    border: solid 1px #e0e0e0;
+    line-height: 26px;
+    width: 120px;
+}
+
+.detailedQw li .require {
+    font-size: 12px;
+    color: #fff;
+    background: #337ab7;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block;
+    width: 54px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.detailedQw li .searchSelect {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    color: #555;
+    border: 1px solid #aaa;
+    text-shadow: none;
+}
+.detailedQw li .searchSelect:hover {
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+.detailedQw li .searchSelect:before {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    pointer-events: none;
+}
+.detailedQw li .searchSelect select {
+    cursor: pointer;
+    padding: 0.5em;
+    padding-right: 2em;
+    width: 100%;
+    border: none;
+    background: transparent;
+    background-image: none;
+    text-indent: 0.01px;
+}
+.detailedQw li .searchSelect select:focus {
+    outline: none;
+}
+
+.detailedQw li .searchSelect:before {
+    font-family: "icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.icon--down:before, .select:before {
+    content: "\e600";
+}
+
+@font-face {
+    font-family: 'icons';
+    src: url(data:application/font-woff;charset=utf-8;base64,d09GRk9UVE8AAARgAAoAAAAABBgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAANgAAADYZbVvCE9TLzIAAAHMAAAAYAAAAGAIIvy2Y21hcAAAAiwAAABMAAAATBpVzFdnYXNwAAACeAAAAAgAAAAIAAAAEGhlYWQAAAKAAAAANgAAADYAl8viaGhlYQAAArgAAAAkAAAAJANuAeZobXR4AAAC3AAAABQAAAAUAwAAdG1heHAAAALwAAAABgAAAAYABVAAbmFtZQAAAvgAAAFFAAABRVcZpu5wb3N0AAAEQAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAAB2Dx0AAAB7ER0AAAAJHQAAAM8SAAYBAQgPERMWG2ljb21vb25pY29tb29udTB1MXUyMHVFNjAwAAACAYkAAwAFAQEEBwoNTPyUDvyUDvyUDvuUDvgg958VgYD7AiOLi4aFg4iEi4SLg46GkYuL+wLzgZaAloqel5eWlpqMmX8I7yvv6wWZl5qKloCXf4p4gIAIDviUFPiUFYsMCgADAgABkAAFAAABTAFmAAAARwFMAWYAAAD1ABkAhAAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAEAAAOYAAeD/4P/gAeAAIAAAAAEAAAAAAAAAAAAAACAAAAAAAAIAAAADAAAAFAADAAEAAAAUAAQAOAAAAAoACAACAAIAAQAg5gD//f//AAAAAAAg5gD//f//AAH/4xoEAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAQAAss1nQF8PPPUACwIAAAAAAM/2xdgAAAAAz/bF2AAAAAABjAE1AAAACAACAAAAAAAAAAEAAAHg/+AAAAIAAAAAAAGMAAEAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAQAAAAIAAHQAAFAAAAUAAAAAAA4ArgABAAAAAAABAA4AAAABAAAAAAACAA4ARwABAAAAAAADAA4AJAABAAAAAAAEAA4AVQABAAAAAAAFABYADgABAAAAAAAGAAcAMgABAAAAAAAKADQAYwADAAEECQABAA4AAAADAAEECQACAA4ARwADAAEECQADAA4AJAADAAEECQAEAA4AVQADAAEECQAFABYADgADAAEECQAGAA4AOQADAAEECQAKADQAYwBpAGMAbwBtAG8AbwBuAFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuAFIAZQBnAHUAbABhAHIAaQBjAG8AbQBvAG8AbgBGAG8AbgB0ACAAZwBlAG4AZQByAGEAdABlAGQAIABiAHkAIABJAGMAbwBNAG8AbwBuAC4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==) format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+/*tab表格*/
+.tab {
+    padding-bottom: 0px;
+}
+
+.tab table {
+    color: #73879C;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.tab table tr:nth-child(even){background:#F4F4F4;}
+
+.tab table tr:hover{
+    background: #ECECFF;
+}
+
+.tab table thead th {
+    font-size: 14px;
+    background: #2A3F54;
+    height: 43px;
+    line-height: 43px;
+    color: #fff;
+    position: relative;
+}
+
+.thList {
+    width: 80px;
+    border: 1px solid #E6E9ED;
+    position: absolute;
+    top: 17px;
+    right: -9px;
+    background: #fff;
+    z-index: 999;
+    display: none;
+    box-shadow: 0 1px 3px #888888;
+    border-radius: 3px;
+    position: absolute;
+    top: 37px;
+}
+
+.thList li {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+}
+
+.tab table th span {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+.tab table th .up {
+    position: absolute;
+    top: -12px;
+}
+
+.tab table th .down {
+    position: absolute;
+    bottom: -3px;
+}
+
+.tab table th img {
+    vertical-align: middle;
+}
+
+.tab table th span.leRig img {
+    vertical-align: middle;
+    position: relative;
+    right: 9px;
+    left: -3px;
+    top: -1px;
+}
+
+.tab table th p {
+    height: 27px;
+    display: inline-block;
+}
+
+.tab table th p img {
+    display: block;
+}
+
+.tab table th p img.img1 {
+    margin-bottom: -6px;
+    margin-top: 9px;
+}
+
+.tab table td {
+    font-size: 12px;
+    border-bottom: 1px solid #E6E9ED;
+    vertical-align: middle;
+    padding: 15px 5px;
+    text-align: center
+}
+
+.more {
+    display: inline-block;
+    position: relative;
+}
+
+.tab table td span {
+    cursor: pointer;
+}
+
+.tab table td a img {
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.tab a {
+    text-decoration: none;
+}
+
+.tab td a {
+    color: #ff5a00;
+}
+
+.tab td .qmore li a {
+    color: #555;
+}
+
+.tab .detail a {
+    margin-right: 8px;
+}
+
+.tabnone {
+    display: none;
+}
+/** 翻页 */
+#zproPageWrap a { text-decoration: none; }
+#zproPageWrap{ width: 100%; margin: 20px 0; height: 36px; text-align: center; }
+#zproPageWrap a,#zproPageWrap em,#zproPageWrap span{ display: inline-block; vertical-align: top; }
+#zproPageWrap span{ margin-right: 4px; }
+#zproPageWrap .zpro-page-goopen{ width: 95px; }
+#zproPageWrap .zpro-page-information{ margin-right: 4px; height: 34px; line-height: 34px; padding: 0 15px; border: 1px solid #dedede; font-size: 14px; color: #666; letter-spacing: 1px; }
+#zproPageWrap .zpro-page-first,
+#zproPageWrap .zpro-page-last,
+#zproPageWrap .zpro-page-prev,
+#zproPageWrap .zpro-page-next{ width: 60px; height: 34px; line-height: 34px; border: 1px solid #dedede; margin-right: 4px; font-size: 14px; color: #666; }
+#zproPageWrap .zpro-go-inpt{ display: inline-block; width: 40px; height: 36px; line-height: 36px; padding: 6px; border: 1px solid #dedede; vertical-align: top; text-align: center; color: #666; box-sizing: border-box; }
+#zproPageWrap .zpro-go-inpt.add-errors{ border-color: #1e90ff; }
+#zproPageWrap #zproGoopen{ display: inline-block; width: 40px; height: 34px; line-height: 34px; background: #fff; border: 1px solid #dedede; color: #666; border-left: none; font-size: 14px; }
+#zproPageWrap #zproSelectNumber{ display: inline-block; width: 50px; height: 36px; line-height: 36px; border: 1px solid #dedede; vertical-align: top; font-size: 14px; color: #666; }
+#zproPageWrap em{ width: 170px; padding: 0 10px; height: 34px; line-height: 34px; margin-right: 4px; border: 1px solid #dedede; padding: 0 10px; font-size: 14px; color: #666; letter-spacing: 1px; }
+#zproPageWrap a:hover,#zproPageWrap #zproGoopen:hover{ background: #1e90ff; color: #fff; border-color: #1e90ff; }

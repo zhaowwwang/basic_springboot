@@ -40,15 +40,15 @@
         <appender-ref ref="CoalescingStatistics"/>
     </logger>
 
-    <logger name="com.basic" level="INFO" />
+    <logger name="com.basic" level="debug" />
 
-    <root level="INFO">
+    <root level="debug">
         <appender-ref ref="console" />
         <appender-ref ref="rollingFile" />
     </root>
 
-    <logger name="org.springframework.jndi" level="WARN"/>
-    <logger name="org.springframework.scheduling" level="WARN"/>
-    <logger name="org.apache" level="WARN"/>
+    <logger name="org.springframework.jndi" level="debug"/>
+    <logger name="org.springframework.scheduling" level="debug"/>
+    <logger name="org.apache" level="debug"/>
 
 </configuration>

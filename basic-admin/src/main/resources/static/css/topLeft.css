@@ -1,0 +1,233 @@
+/*导航*/
+
+.nav {
+    width: 100%;
+    height: 50px;
+    background: #EDEDED;
+    border-bottom: 1px solid #D9DEE4;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+.navLeft {
+    float: left;
+}
+
+.navLeft img {
+    width: 40px;
+    height: 40px;
+    margin: 5px 0 0 20px;
+    float: left;
+}
+
+.navLeft span {
+    font-size: 22px;
+    float: left;
+    line-height: 50px;
+    padding-left: 10px;
+}
+
+.navRight {
+    float: right;
+}
+
+.navRight dl {
+    float: left;
+    margin-right: 20px;
+    cursor: pointer;
+    padding: 0 0px;
+}
+
+.navRight dl dt {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    float: left;
+}
+
+.navRight dl dt img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.navRight dl dd {
+    float: left;
+    margin-left: 10px;
+    position: relative;
+}
+
+.navRight dl dd a {
+    line-height: 50px;
+    color: #56585b;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navRight .home {
+    display: block;
+    float: left;
+    font-size: 14px;
+    line-height: 50px;
+    font-weight: bold;
+    color: #545454;
+    margin-right: 12px;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
+.navRight .quit {
+    display: block;
+    float: left;
+    font-size: 14px;
+    line-height: 50px;
+    font-weight: bold;
+    color: #545454;
+    margin-right: 24px;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
+.loginName {
+    min-width: 82px;
+    background: #fff;
+    position: absolute;
+    top: 51px;
+    border: 1px solid #E6E9ED;
+    border-bottom: none;
+    display: none;
+}
+
+.loginName li {
+    height: 30px;
+    padding-left: 10px;
+    line-height: 30px;
+    cursor: pointer;
+    border-bottom: 1px solid #E6E9ED;
+}
+
+.loginName li:hover {
+    background: #f5f5f5;
+}
+
+
+/*左侧*/
+
+.mainLeft {
+    width: 12%;
+    background: #2A3F54;
+    position: fixed;
+    left: 0;
+    min-height: 100%;
+    z-index: 99;
+}
+
+.mainLeft ul {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.mainLeft .child_menu {
+    padding-top: 5px;
+}
+
+.mainLeft ul li {
+    color: #E7E7E7;
+    position: relative;
+    cursor: pointer;
+}
+
+.mainLeft ul li a {
+    color: #E7E7E7;
+    /*  padding: 13px 15px 12px;*/
+    text-decoration: none;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 45px;
+    display: block;
+    position: relative;
+}
+
+
+.managementList:after {
+     content: url(../images/iconfont-list.png);
+     display: block;
+     width: 17px;
+     height: 13px;
+     position: absolute;
+     top: 15px;
+     left: 15px;
+ }
+
+.list .managementList span {
+    background: url(../images/jtou.png) no-repeat;
+    width: 13px;
+    height: 7px;
+    position: absolute;
+    right: 20px;
+    top: 19px;
+}
+
+.child_menu {
+    display: none;
+}
+
+.mainLeft ul li .child_menu li {
+    height: 35px;
+    line-height: 40px;
+    padding-left: 35px;
+}
+
+.mainLeft ul li .child_menu li:hover {
+    background: #374A5E!important;
+}
+
+.mainLeft ul li .child_menu li a {
+    height: 35px;
+    line-height: 39px;
+    padding-left: 15px;
+}
+
+.child_menu li::before {
+    background: #425668;
+    bottom: auto;
+    content: "";
+    height: 8px;
+    left: 23px;
+    margin-top: 15px;
+    position: absolute;
+    right: auto;
+    width: 8px;
+    z-index: 1;
+    border-radius: 50%;
+}
+.child_menu li.actives::before {
+    background: #0f6ac5;
+    bottom: auto;
+    content: "";
+    height: 8px;
+    left: 23px;
+    margin-top: 15px;
+    position: absolute;
+    right: auto;
+    width: 8px;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.child_menu li::after {
+    border-left: 1px solid #425668;
+    bottom: 0;
+    content: "";
+    left: 27px;
+    position: absolute;
+    top: 0;
+}
+
+.shadow {
+    text-shadow: rgba(0, 0, 0, .25) 0 -1px 0;
+    background: linear-gradient(#334556, #2C4257), #2A3F54;
+    box-shadow: rgba(0, 0, 0, .25) 0 1px 0, inset rgba(255, 255, 255, .16) 0 1px 0;
+}
