@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.basic.core.mapper.system.SystemRoleMapper">
+  <resultMap id="BaseResultMap" type="com.basic.core.bean.system.SystemRole">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, role_name, remark, create_time, update_time,org_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getSystemRoleList" parameterType="com.basic.core.bean.system.SystemRole" resultMap="BaseResultMap">
+    select a.id,a.role_name,a.remark,a.create_time,a.update_time,a.org_code,b.org_name
+    from system_role a left join system_organization b on a.org_code = b.org_code
+    <where>
+      <if test="roleName!=null and roleName!=''">
+        a.role_name = #{roleName}
+      </if>
+      <if test="orgCode!=null and orgCode!=''">
+        and a.org_code = #{orgCode}
+      </if>
+    </where>
+    LIMIT #{startOfPage}, #{pageSize}
+  </select>
+
+  <select id="getSystemRoleListCount" parameterType="com.basic.core.bean.system.SystemRole" resultType="int">
+    select count(1) from system_role
+    <where>
+      <if test="roleName!=null and roleName!=''">
+        role_name = #{roleName}
+      </if>
+      <if test="orgCode!=null and orgCode!=''">
+        and org_code = #{orgCode}
+      </if>
+    </where>
+  </select>
+
+  <select id="getUserRoleList" parameterType="int" resultType="string">
+    SELECT role_id FROM system_user_role WHERE user_id = #{useId}
+  </select>
+
+  <update id="deleteResourceByPrimaryKey" parameterType="int">
+    DELETE FROM system_role_resource WHERE role_id = #{roleId}
+  </update>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.basic.core.bean.system.SystemRole">
+    insert into system_role (id, role_name, remark, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.basic.core.bean.system.SystemRole">
+    insert into system_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      create_time,update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      now(),now()
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.basic.core.bean.system.SystemRole">
+    update system_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      update_time = now()
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.basic.core.bean.system.SystemRole">
+    update system_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteRoleByUserId" parameterType="java.lang.Integer">
+    delete from system_user_role where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelectiveRoleResource" parameterType="map">
+    insert into system_role_resource ( role_id, resource_id)
+    values
+    <foreach collection="resourceIds" index="index" item="item" separator=",">
+      (#{roleId},#{item})
+    </foreach>
+  </insert>
+
+  <insert id="insertSelectiveUserRole" parameterType="map">
+    insert into system_user_role ( user_id, role_id,create_time,update_time)
+    values
+    <foreach collection="roleIds" index="index" item="item" separator=",">
+      (#{userId},#{item},now(),now())
+    </foreach>
+  </insert>
+
+</mapper>

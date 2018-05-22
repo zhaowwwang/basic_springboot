@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.basic.core.mapper.system.SystemOrganizationMapper">
+  <resultMap id="BaseResultMap" type="com.basic.core.bean.system.SystemOrganization">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="org_address" jdbcType="VARCHAR" property="orgAddress" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="pid_name" jdbcType="VARCHAR" property="pidName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_name, org_address, org_code, pid, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_organization
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_organization
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.basic.core.bean.system.SystemOrganization">
+    insert into system_organization (id, org_name, org_address, 
+      org_code, pid, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{orgName,jdbcType=VARCHAR}, #{orgAddress,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.basic.core.bean.system.SystemOrganization">
+    insert into system_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="orgAddress != null">
+        org_address,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      create_time,update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddress != null">
+        #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      now(),now()
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.basic.core.bean.system.SystemOrganization">
+    update system_organization
+    <set>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddress != null">
+        org_address = #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      update_time = now()
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.basic.core.bean.system.SystemOrganization">
+    update system_organization
+    set org_name = #{orgName,jdbcType=VARCHAR},
+      org_address = #{orgAddress,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getSystemOrgList" parameterType="com.basic.core.bean.system.SystemOrganization" resultMap="BaseResultMap">
+    SELECT a.id, a.org_name, a.org_address, a.org_code, a.pid, a.create_time, a.update_time,b.org_name as pid_name
+    FROM system_organization a left join system_organization b on a.pid=b.id
+    <if test="orgName!=null and orgName!=''">
+      AND org_name LIKE concat('%', #{orgName}, '%')
+    </if>
+    <if test="orgCode!=null and orgCode!=''">
+      AND org_code = #{orgCode}
+    </if>
+    <if test="startTime!=null and startTime!=''">
+      AND create_time <![CDATA[  >=  #{startTime} ]]>
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      AND create_time <![CDATA[  <=  #{endTime} ]]>
+    </if>
+    LIMIT #{startOfPage}, #{pageSize}
+  </select>
+
+  <select id="getSystemOrgListCount" parameterType="com.basic.core.bean.system.SystemOrganization" resultType="int">
+    SELECT COUNT(1) FROM system_organization
+    <if test="orgName!=null and orgName!=''">
+      AND org_name LIKE concat('%', #{orgName}, '%')
+    </if>
+    <if test="orgCode!=null and orgCode!=''">
+      AND org_code = #{orgCode}
+    </if>
+    <if test="startTime!=null and startTime!=''">
+      AND create_time <![CDATA[  >=  #{startTime} ]]>
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      AND create_time <![CDATA[  <=  #{endTime} ]]>
+    </if>
+  </select>
+
+  <select id="getOrgOption" resultMap="BaseResultMap">
+    select id,org_code,org_name from system_organization
+  </select>
+
+</mapper>
