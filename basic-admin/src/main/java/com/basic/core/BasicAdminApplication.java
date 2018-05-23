@@ -3,6 +3,8 @@ package com.basic.core;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -13,9 +15,15 @@ import org.springframework.context.annotation.ImportResource;
  */
 @ImportResource(locations = {"classpath:dubbo-*.xml"})
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class BasicAdminApplication {
+public class BasicAdminApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(BasicAdminApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BasicAdminApplication.class, args);
 	}
+
 }
