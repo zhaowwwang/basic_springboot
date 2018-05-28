@@ -1,20 +1,21 @@
 package com.basic.core.admin.controller.system;
 
+import com.alibaba.fastjson.JSON;
 import com.basic.core.admin.constant.SystemConstant;
 import com.basic.core.admin.controller.BaseController;
 import com.basic.core.admin.shiro.ShiroUtils;
+import com.basic.core.api.system.SystemUserService;
+import com.basic.core.bean.system.SystemUser;
 import com.basic.core.web.WebJson;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Author: wangzw
@@ -25,20 +26,13 @@ import java.util.Map;
 @Controller
 public class SystemLoginController extends BaseController {
 
-    /**
-     * 首页
-     */
-    @RequestMapping(value = "/index")
-    public String login() {
-        Map<String, Object> model = new HashMap<>();
-        model.put("name", "Spring Boot");
-        return "index";
-    }
+    @Autowired
+    private SystemUserService systemUserService;
 
     /**
      * 首页
      */
-    @RequestMapping(value = "/systemIndex")
+    @RequestMapping(value = "/systemIndex.do")
     public String index() {
         if(ShiroUtils.isLogin()){
             return "main";
@@ -52,14 +46,20 @@ public class SystemLoginController extends BaseController {
      * @Version: 1.0
      * @Date: 2017/4/1 14:03
      */
-    @RequestMapping("/login_toLogin")
+    @RequestMapping("/login_toLogin.do")
     public ModelAndView toLogin(){
+        try {
+            SystemUser admin = systemUserService.getSystemUserByUserName("admin");
+            System.out.println(JSON.toJSONString(admin));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ModelAndView mv = getModelAndView();
         mv.setViewName("login/login");
         return mv;
     }
 
-    @RequestMapping("/login_confirmLogin")
+    @RequestMapping("/login_confirmLogin.do")
     @ResponseBody
     public Object login_confirmLogin(String loginData){
         if(loginData==null){
@@ -94,7 +94,7 @@ public class SystemLoginController extends BaseController {
         return SuccessToWeb("success");
     }
 
-    @RequestMapping("/login_toLogOut")
+    @RequestMapping("/login_toLogOut.do")
     @ResponseBody
     public WebJson logout(){
         ShiroUtils.logout();

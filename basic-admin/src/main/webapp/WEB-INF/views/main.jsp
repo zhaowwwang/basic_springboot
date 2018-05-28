@@ -68,7 +68,7 @@
         <!-- 右侧 -->
         <div class="mainRight">
             <p class="notice"> 当前位置：</p>
-            <iframe id="iframe" src="../main_index.html" style="height: 95%;"></iframe>
+            <iframe id="iframe" src="main_index.html" style="height: 95%;"></iframe>
         </div>
     </div>
 </div>

@@ -26,7 +26,7 @@ public class VerifyCodeController {
 
     private final int verifyCodeLength=4;
 
-    @RequestMapping("/verifyCode")
+    @RequestMapping("/verifyCode.do")
     public void generate(HttpServletResponse response){
         try {
             ByteArrayOutputStream output = new ByteArrayOutputStream();

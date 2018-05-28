@@ -50,7 +50,7 @@ public abstract class BaseController {
         return WebJson.error(errorMsg);
     }
 
-    @RequestMapping(value = "/goToHtml",method = RequestMethod.GET)
+    @RequestMapping(value = "/goToHtml.do",method = RequestMethod.GET)
     public String toListHtml(@RequestParam String goToHtmlUrl){
         try{
             return goToHtmlUrl;

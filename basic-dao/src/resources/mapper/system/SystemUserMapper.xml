@@ -54,7 +54,7 @@
     </where>
   </select>
 
-  <select id="getSystemUserByUserName" parameterType="string" resultType="com.basic.core.bean.system.SystemUser">
+  <select id="getSystemUserByUserName" parameterType="string" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List"/> FROM system_user
     WHERE user_name = #{userName}
   </select>
