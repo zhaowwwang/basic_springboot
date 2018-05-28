@@ -39,7 +39,7 @@ public class SystemRoleController extends BaseController {
      * @Version: 1.0
      * @Date: 2017/4/6 11:24
      */
-    @RequestMapping(value="/getListData")
+    @RequestMapping(value="/getListData.do")
     public WebJson getRoleList(SystemRole systemRoleEntiy){
         try{
             List<SystemRole> systemRoleList = systemRoleService.getSystemRoleList(systemRoleEntiy);
@@ -52,7 +52,7 @@ public class SystemRoleController extends BaseController {
         }
     }
 
-    @RequestMapping("addRole")
+    @RequestMapping("addRole.do")
     public WebJson addSystemRole(SystemRole systemRole){
         try{
             systemRoleService.insertSelective(systemRole);
@@ -63,7 +63,7 @@ public class SystemRoleController extends BaseController {
         }
     }
 
-    @RequestMapping("editRole")
+    @RequestMapping("editRole.do")
     public WebJson editSystemRole(SystemRole systemRole){
         try{
             if(StringUtils.isEmpty(systemRole.getId())){
@@ -77,7 +77,7 @@ public class SystemRoleController extends BaseController {
         }
     }
 
-    @RequestMapping("delRole")
+    @RequestMapping("delRole.do")
     public WebJson deleteSystemRole(SystemRole systemRole){
         try{
             if(StringUtils.isEmpty(systemRole.getId())){
@@ -92,7 +92,7 @@ public class SystemRoleController extends BaseController {
         }
     }
 
-    @RequestMapping("viewRole")
+    @RequestMapping("viewRole.do")
     public WebJson viewSystemRole(SystemRole systemRole){
         try{
             if(StringUtils.isEmpty(systemRole.getId())){
@@ -111,7 +111,7 @@ public class SystemRoleController extends BaseController {
      * @Version: 1.0
      * @Date: 2017/10/1 21:48
      */
-    @RequestMapping("viewRoleAuth")
+    @RequestMapping("viewRoleAuth.do")
     public WebJson viewUserAuth(SystemRole systemRole){
         try{
             List<SystemResourceVO> systemResoucesAll = systemResourceService.getSystemResoucesAll(systemRole.getId());
@@ -128,7 +128,7 @@ public class SystemRoleController extends BaseController {
      * @Version: 1.0
      * @Date: 2017/10/2 14:47
      */
-    @RequestMapping("updateRoleAuth")
+    @RequestMapping("updateRoleAuth.do")
     public WebJson updateRoleAuth(int roleId,@RequestParam(value = "ids[]") List<String> ids){
         try{
             systemResourceService.updateRoleAuth(roleId,ids);

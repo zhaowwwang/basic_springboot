@@ -39,7 +39,7 @@ public class SystemUserController extends BaseController {
 	 * @Version: 1.0
 	 * @Date: 2017/4/6 11:24
 	 */
-	@RequestMapping(value="/getListData")
+	@RequestMapping(value="/getListData.do")
 	public WebJson getListData(SystemUser systemUserEntiy){
 		try{
 			List<SystemUser> systemUserEntiyList = systemUserService.getSystemUserList(systemUserEntiy);
@@ -52,7 +52,7 @@ public class SystemUserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/addUser")
+	@RequestMapping("/addUser.do")
 	public WebJson addUser(SystemUser systemUserEntiy){
 		try{
 			systemUserEntiy.setUserStatus("1");
@@ -65,7 +65,7 @@ public class SystemUserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/updateUser")
+	@RequestMapping("/updateUser.do")
 	public WebJson updateUser(SystemUser systemUserEntiy){
 		try{
 			systemUserService.updateByPrimaryKeySelective(systemUserEntiy);
@@ -76,7 +76,7 @@ public class SystemUserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/delUser")
+	@RequestMapping("/delUser.do")
 	public WebJson delUser(int id){
 		try{
 			systemUserService.deleteByPrimaryKey(id);
@@ -87,7 +87,7 @@ public class SystemUserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/viewUser")
+	@RequestMapping("/viewUser.do")
 	public WebJson viewUser(int id){
 		try{
 			SystemUser systemUser = systemUserService.selectByPrimaryKey(id);
@@ -98,7 +98,7 @@ public class SystemUserController extends BaseController {
 		}
 	}
 
-	@RequestMapping("/updatePwd")
+	@RequestMapping("/updatePwd.do")
 	public WebJson updatePwd(SystemUser systemUserEntiy){
 		try{
 			PasswordUtil.setUserPwd(systemUserEntiy);
@@ -116,7 +116,7 @@ public class SystemUserController extends BaseController {
 	 * @Version: 1.0
 	 * @Date: 2017/4/6 11:24
 	 */
-	@RequestMapping(value="/getRoleList")
+	@RequestMapping(value="/getRoleList.do")
 	public WebJson getRoleList(Integer userId){
 		try{
 			SystemRole systemRoleEntiy = new SystemRole();
@@ -134,7 +134,7 @@ public class SystemUserController extends BaseController {
 	 * @Version: 1.0
 	 * @Date: 2017/4/6 11:24
 	 */
-	@RequestMapping(value="/updateUserRole")
+	@RequestMapping(value="/updateUserRole.do")
 	public WebJson updateUserRole(Integer userId,@RequestParam(value = "roleIds[]") List<String> roleIds){
 		try{
 			systemRoleService.insertSelectiveUserRole(userId,roleIds);

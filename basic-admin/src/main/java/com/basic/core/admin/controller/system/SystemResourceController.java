@@ -34,7 +34,7 @@ public class SystemResourceController extends BaseController {
      * @Version: 1.0
      * @Date: 2017/4/6 11:24
      */
-    @RequestMapping(value="/getResourceList")
+    @RequestMapping(value="/getResourceList.do")
     public WebJson getRoleList(SystemResource systemResource){
         try{
             List<SystemResource> systemResourceList = systemResourceService.getSystemResourceList(systemResource);
@@ -47,7 +47,7 @@ public class SystemResourceController extends BaseController {
         }
     }
 
-    @RequestMapping("addResource")
+    @RequestMapping("addResource.do")
     public WebJson addSystemResource(SystemResource systemResource){
         try{
             systemResourceService.insertSelective(systemResource);
@@ -58,7 +58,7 @@ public class SystemResourceController extends BaseController {
         }
     }
 
-    @RequestMapping("editResource")
+    @RequestMapping("editResource.do")
     public WebJson editSystemResource(SystemResource systemResource){
         try{
             systemResourceService.updateByPrimaryKeySelective(systemResource);
@@ -80,7 +80,7 @@ public class SystemResourceController extends BaseController {
         }
     }
 
-    @RequestMapping("viewResource")
+    @RequestMapping("viewResource.do")
     public WebJson viewSystemResource(SystemResource systemResource){
         try{
             return returnDataToWeb(systemResourceService.selectByPrimaryKey(systemResource.getId()));
@@ -90,7 +90,7 @@ public class SystemResourceController extends BaseController {
         }
     }
 
-    @RequestMapping("getResourceOption")
+    @RequestMapping("getResourceOption.do")
     public WebJson getResourceOption(){
         try{
             SystemResource systemResource = new SystemResource();
@@ -113,7 +113,7 @@ public class SystemResourceController extends BaseController {
         }
     }
 
-    @RequestMapping("getPidResource")
+    @RequestMapping("getPidResource.do")
     public WebJson getPidResource(){
         try{
             SystemResource systemResource = new SystemResource();

@@ -32,7 +32,7 @@ public class SystemOrganizationController extends BaseController {
      * @Version: 1.0
      * @Date: 2017/4/6 11:24
      */
-    @RequestMapping(value="/getOrgList")
+    @RequestMapping(value="/getOrgList.do")
     public WebJson getOrgList(SystemOrganization systemOrganization){
         try{
             List<SystemOrganization> systemOrgList = systemOrganizationService.getSystemOrgList(systemOrganization);
@@ -45,7 +45,7 @@ public class SystemOrganizationController extends BaseController {
         }
     }
 
-    @RequestMapping("/addOrg")
+    @RequestMapping("/addOrg.do")
     public WebJson addSystemOrg(SystemOrganization systemOrganization){
         try{
             systemOrganizationService.insertSelective(systemOrganization);
@@ -56,7 +56,7 @@ public class SystemOrganizationController extends BaseController {
         }
     }
 
-    @RequestMapping("/editOrg")
+    @RequestMapping("/editOrg.do")
     public WebJson editSystemOrg(SystemOrganization systemOrganization){
         try{
             if(StringUtils.isEmpty(systemOrganization.getId())){
@@ -70,7 +70,7 @@ public class SystemOrganizationController extends BaseController {
         }
     }
 
-    @RequestMapping("/delOrg")
+    @RequestMapping("/delOrg.do")
     public WebJson deleteSystemOrg(SystemOrganization systemOrganization){
         try{
             if(StringUtils.isEmpty(systemOrganization.getId())){
@@ -84,7 +84,7 @@ public class SystemOrganizationController extends BaseController {
         }
     }
 
-    @RequestMapping("/viewOrg")
+    @RequestMapping("/viewOrg.do")
     public WebJson viewSystemOrg(SystemOrganization systemOrganization){
         try{
             if(StringUtils.isEmpty(systemOrganization.getId())){
@@ -97,7 +97,7 @@ public class SystemOrganizationController extends BaseController {
         }
     }
 
-    @RequestMapping("getOrgOption")
+    @RequestMapping("getOrgOption.do")
     public WebJson getOrgOption(){
         try{
             List<SystemOrganization> systemOrganizations = systemOrganizationService.getOrgOption();
