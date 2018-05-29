@@ -8,9 +8,11 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, phone, vrf_code, create_time, update_time
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -33,12 +35,14 @@
     delete from user_sms_code
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.basic.core.bean.system.UserSmsCode">
     insert into user_sms_code (id, phone, vrf_code, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{vrfCode,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
+
   <insert id="insertSelective" parameterType="com.basic.core.bean.system.UserSmsCode">
     insert into user_sms_code
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,6 +71,7 @@
       now(),now()
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.basic.core.bean.system.UserSmsCode">
     update user_sms_code
     <set>
@@ -85,6 +90,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.basic.core.bean.system.UserSmsCode">
     update user_sms_code
     set phone = #{phone,jdbcType=VARCHAR},

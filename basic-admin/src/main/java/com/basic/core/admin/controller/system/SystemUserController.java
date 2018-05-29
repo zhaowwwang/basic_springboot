@@ -4,7 +4,7 @@ import com.basic.core.api.system.SystemRoleService;
 import com.basic.core.api.system.SystemUserService;
 import com.basic.core.bean.system.SystemRole;
 import com.basic.core.bean.system.SystemUser;
-import com.basic.core.bean.system.SystemUserRoleVO;
+import com.basic.core.bean.system.vo.SystemUserRoleVo;
 import com.basic.core.admin.common.PasswordUtil;
 import com.basic.core.admin.controller.BaseController;
 import com.basic.core.util.WebPageUtils;
@@ -99,10 +99,10 @@ public class SystemUserController extends BaseController {
 	}
 
 	@RequestMapping("/updatePwd.do")
-	public WebJson updatePwd(SystemUser systemUserEntiy){
+	public WebJson updateUserPwd(SystemUser systemUserEntiy){
 		try{
 			PasswordUtil.setUserPwd(systemUserEntiy);
-			systemUserService.updatePwd(systemUserEntiy);
+			systemUserService.updateUserPwd(systemUserEntiy);
 			return SuccessToWeb("强制改密成功！");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -120,7 +120,7 @@ public class SystemUserController extends BaseController {
 	public WebJson getRoleList(Integer userId){
 		try{
 			SystemRole systemRoleEntiy = new SystemRole();
-			List<SystemUserRoleVO> userRoleList = systemRoleService.getUserRoleList(systemRoleEntiy, userId);
+			List<SystemUserRoleVo> userRoleList = systemRoleService.getUserRoleList(systemRoleEntiy, userId);
 			return returnDataToWeb(userRoleList);
 		}catch(Exception e){
 			e.printStackTrace();

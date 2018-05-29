@@ -1,7 +1,7 @@
 package com.basic.core.api.system;
 
 import com.basic.core.bean.system.SystemRole;
-import com.basic.core.bean.system.SystemUserRoleVO;
+import com.basic.core.bean.system.vo.SystemUserRoleVo;
 import java.util.List;
 
 /**
@@ -40,7 +40,7 @@ public interface SystemRoleService {
 
     SystemRole selectByPrimaryKey(Integer id) throws Exception;
 
-    List<SystemUserRoleVO> getUserRoleList(SystemRole systemRoleEntiy, Integer userId) throws Exception;
+    List<SystemUserRoleVo> getUserRoleList(SystemRole systemRoleEntiy, Integer userId) throws Exception;
 
     int insertSelectiveUserRole(Integer userId, List<String> roleIds);
 }

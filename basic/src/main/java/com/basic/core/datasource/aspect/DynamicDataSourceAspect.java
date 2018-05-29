@@ -27,6 +27,7 @@ public class DynamicDataSourceAspect {
     public void changeDataSource(JoinPoint point, TargetDataSource ds) throws Throwable {
         String dsId = ds.name();
         if (!DynamicDataSourceContextHolder.containsDataSource(dsId)) {
+            DynamicDataSourceContextHolder.setDataSourceType(DynamicDataSourceContextHolder.DEFAULT_DATA_SOURCE);
             logger.info("数据源:{}不存在，使用默认数据源:{}", ds.name(), DynamicDataSourceContextHolder.getDataSourceType());
         } else {
             logger.debug("Use DataSource : {} > {}", ds.name(), point.getSignature());

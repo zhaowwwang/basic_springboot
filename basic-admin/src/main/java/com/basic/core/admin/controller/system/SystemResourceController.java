@@ -90,19 +90,25 @@ public class SystemResourceController extends BaseController {
         }
     }
 
+    /**
+     * 获取资源的下拉选项
+     * @author: wangzw
+     * @version: 1.0
+     * @date: 2018/5/29 14:11
+     */
     @RequestMapping("getResourceOption.do")
     public WebJson getResourceOption(){
         try{
             SystemResource systemResource = new SystemResource();
             List<SystemResource> optionList = systemResourceService.getOptionList(systemResource);
-            Map<String,String> statusMap = new HashMap<>();
+            Map<String,String> statusMap = new HashMap<>(2);
             statusMap.putIfAbsent("1","有效");
             statusMap.putIfAbsent("2","无效");
-            Map<String,String> typeMap = new HashMap<>();
+            Map<String,String> typeMap = new HashMap<>(3);
             typeMap.putIfAbsent("1","一级菜单");
             typeMap.putIfAbsent("2","二级菜单");
             typeMap.putIfAbsent("3","按钮");
-            Map<String,Object> resultMap = new HashMap<>();
+            Map<String,Object> resultMap = new HashMap<>(3);
             resultMap.putIfAbsent("pidOption",optionList);
             resultMap.putIfAbsent("statusOption",statusMap);
             resultMap.putIfAbsent("typeOption",typeMap);

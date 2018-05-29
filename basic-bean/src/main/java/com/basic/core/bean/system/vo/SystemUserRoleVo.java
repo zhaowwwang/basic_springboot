@@ -1,8 +1,8 @@
-package com.basic.core.bean.system;
+package com.basic.core.bean.system.vo;
 
 import java.io.Serializable;
 
-public class SystemUserRoleVO implements Serializable{
+public class SystemUserRoleVo implements Serializable{
     //主键id
     private Integer id;
 

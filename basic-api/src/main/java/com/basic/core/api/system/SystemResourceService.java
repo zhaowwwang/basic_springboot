@@ -1,7 +1,7 @@
 package com.basic.core.api.system;
 
 import com.basic.core.bean.system.SystemResource;
-import com.basic.core.bean.system.SystemResourceVO;
+import com.basic.core.bean.system.vo.SystemResourceVo;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public interface SystemResourceService {
 
     List<SystemResource> getOptionList(SystemResource systemResource) throws Exception;
 
-    List<SystemResourceVO> getSystemResoucesAll(int roleId) throws Exception;
+    List<SystemResourceVo> getSystemResourcesAll(int roleId) throws Exception;
 
     int updateRoleAuth(int roleId, List<String> resourceIds) throws Exception;
 }

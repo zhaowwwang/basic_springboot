@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * 短信验证码
  * @author: wangzw
  * @date: 2017/12/26 14:27
  * @version: 1.0

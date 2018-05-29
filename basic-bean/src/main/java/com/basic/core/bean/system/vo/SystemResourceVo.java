@@ -1,4 +1,4 @@
-package com.basic.core.bean.system;
+package com.basic.core.bean.system.vo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * @Description: 系统全部的菜单
  * @Version: 1.0
  */
-public class SystemResourceVO implements Serializable {
+public class SystemResourceVo implements Serializable {
 
     private int id;
     private String resourceName;

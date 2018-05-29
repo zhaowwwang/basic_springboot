@@ -2,7 +2,7 @@ package com.basic.core.admin.controller.system;
 
 import com.basic.core.api.system.SystemResourceService;
 import com.basic.core.api.system.SystemRoleService;
-import com.basic.core.bean.system.SystemResourceVO;
+import com.basic.core.bean.system.vo.SystemResourceVo;
 import com.basic.core.bean.system.SystemRole;
 import com.basic.core.admin.controller.BaseController;
 import com.basic.core.util.WebPageUtils;
@@ -114,8 +114,8 @@ public class SystemRoleController extends BaseController {
     @RequestMapping("viewRoleAuth.do")
     public WebJson viewUserAuth(SystemRole systemRole){
         try{
-            List<SystemResourceVO> systemResoucesAll = systemResourceService.getSystemResoucesAll(systemRole.getId());
-            return returnDataToWeb(systemResoucesAll);
+            List<SystemResourceVo> systemResourcesAll = systemResourceService.getSystemResourcesAll(systemRole.getId());
+            return returnDataToWeb(systemResourcesAll);
         }catch(Exception e){
             e.printStackTrace();
             return FailToWeb("删除角色信息失败，请稍后再试！");

@@ -3,6 +3,7 @@ package com.basic.core.mapper.system;
 import com.basic.core.bean.system.UserSmsCode;
 
 public interface UserSmsCodeMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(UserSmsCode record);

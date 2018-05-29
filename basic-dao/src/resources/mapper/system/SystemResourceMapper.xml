@@ -16,20 +16,24 @@
     <result column="status_name" jdbcType="VARCHAR" property="statusName" />
     <result column="type_name" jdbcType="VARCHAR" property="typeName" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, resource_name, resource_url, description, resource_icon, pid, resource_status, 
     resource_type, create_time, update_time
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from system_resource
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from system_resource
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.basic.core.bean.system.SystemResource">
     insert into system_resource (id, resource_name, resource_url, 
       description, resource_icon, pid, 
@@ -40,12 +44,10 @@
       #{resourceStatus,jdbcType=TINYINT}, #{resourceType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.basic.core.bean.system.SystemResource">
+
+  <insert id="insertSelective" parameterType="com.basic.core.bean.system.SystemResource" keyProperty="id" useGeneratedKeys="true">
     insert into system_resource
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="resourceName != null">
         resource_name,
       </if>
@@ -70,9 +72,6 @@
       create_time,update_time,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="resourceName != null">
         #{resourceName,jdbcType=VARCHAR},
       </if>
@@ -97,6 +96,7 @@
       now(),now()
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.basic.core.bean.system.SystemResource">
     update system_resource
     <set>
@@ -125,6 +125,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.basic.core.bean.system.SystemResource">
     update system_resource
     set resource_name = #{resourceName,jdbcType=VARCHAR},
@@ -140,21 +141,21 @@
   </update>
 
   <select id="getSystemResourceList" parameterType="com.basic.core.bean.system.SystemResource" resultMap="BaseResultMap">
-    SELECT
+    select
     a.id,
     a.resource_name,
     a.resource_url,
     a.description,
     a.resource_icon,
     a.pid,
-    CASE a.resource_status WHEN 1 THEN	'有效' when 2 then '无效' end as status_name,
-    CASE a.resource_type WHEN 1 THEN	'一级菜单' when 2 then '二级菜单' when 3 then '按钮' end as type_name,
+    case a.resource_status when 1 then	'有效' when 2 then '无效' end as status_name,
+    case a.resource_type when 1 then	'一级菜单' when 2 then '二级菜单' when 3 then '按钮' end as type_name,
     a.create_time,
     a.update_time,
     b.resource_name as pid_name
-    FROM
+    from
     system_resource a
-    LEFT JOIN system_resource b ON a.pid = b.id
+    left join system_resource b ON a.pid = b.id
     <where>
       <if test="resourceName!=null and resourceName!=''">
         a.resource_name like concat('%',#{resourceName},'%')
@@ -163,7 +164,7 @@
         a.pid = #{pid}
       </if>
     </where>
-    LIMIT #{startOfPage}, #{pageSize}
+    limit #{startOfPage}, #{pageSize}
   </select>
 
   <select id="getOptionList" parameterType="com.basic.core.bean.system.SystemResource" resultMap="BaseResultMap">
@@ -188,8 +189,8 @@
   </select>
 
   <select id="getUserResourceUrlList" parameterType="list" resultType="string">
-    SELECT resource_url FROM system_resource WHERE id IN (
-    SELECT DISTINCT resource_id FROM system_role_resource WHERE role_id in
+    select resource_url from system_resource where id in (
+    select distinct resource_id from system_role_resource where role_id in
     <foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
       #{itemId}
     </foreach>
@@ -197,11 +198,11 @@
   </select>
 
   <select id="getUserResourceIdList" parameterType="int" resultType="integer">
-    SELECT resource_id FROM system_role_resource WHERE role_id = #{roleId}
+    select resource_id from system_role_resource where role_id = #{roleId}
   </select>
 
-  <select id="getAllRresourceList" parameterType="int" resultMap="BaseResultMap">
-    select id,resource_name,pid from system_resource where resource_status= 1 and resource_type= #{resoucreType} order by pid
+  <select id="getAllResourceList" parameterType="int" resultMap="BaseResultMap">
+    select id,resource_name,pid from system_resource where resource_status= 1 and resource_type= #{resourcesType} order by pid
   </select>
 
   <select id="getButtonResourcePidList" resultType="integer">

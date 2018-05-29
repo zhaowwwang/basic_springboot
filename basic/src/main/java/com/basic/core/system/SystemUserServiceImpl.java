@@ -104,7 +104,7 @@ public class SystemUserServiceImpl implements SystemUserService {
     }
 
     @Override
-    public int updatePwd(SystemUser systemUser) {
-        return systemUserDao.updatePwd(systemUser);
+    public int updateUserPwd(SystemUser systemUser) {
+        return systemUserDao.updateUserPwd(systemUser);
     }
 }

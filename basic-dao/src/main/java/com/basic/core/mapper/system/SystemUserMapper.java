@@ -42,5 +42,5 @@ public interface SystemUserMapper {
 
     List<Integer> getUserRoleList(Integer userId);
 
-    int updatePwd(SystemUser systemUser);
+    int updateUserPwd(SystemUser systemUser);
 }

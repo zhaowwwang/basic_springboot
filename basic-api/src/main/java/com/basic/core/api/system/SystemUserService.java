@@ -76,5 +76,5 @@ public interface SystemUserService {
      */
     List<Integer> getUserRoleList(Integer userId);
 
-    int updatePwd(SystemUser systemUser);
+    int updateUserPwd(SystemUser systemUser);
 }

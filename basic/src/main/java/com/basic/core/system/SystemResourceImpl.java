@@ -2,7 +2,7 @@ package com.basic.core.system;
 
 import com.basic.core.api.system.SystemResourceService;
 import com.basic.core.bean.system.SystemResource;
-import com.basic.core.bean.system.SystemResourceVO;
+import com.basic.core.bean.system.vo.SystemResourceVo;
 import com.basic.core.mapper.system.SystemResourceMapper;
 import com.basic.core.mapper.system.SystemRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import java.util.Map;
  * @Description:
  * @Version: 1.0
  */
-
 @Service
 public class SystemResourceImpl implements SystemResourceService {
 
@@ -74,24 +73,23 @@ public class SystemResourceImpl implements SystemResourceService {
      * @Date: 2017/10/1 20:03
      */
     @Override
-    public List<SystemResourceVO> getSystemResoucesAll(int roleId) throws Exception {
+    public List<SystemResourceVo> getSystemResourcesAll(int roleId) throws Exception {
         try{
-            List<SystemResource> baseRresourceList = systemResourceDao.getAllRresourceList(1);
-            if(baseRresourceList.size() > 0){
-                List<SystemResource> secondResourceList = systemResourceDao.getAllRresourceList(2);
+            List<SystemResource> baseResourceList = systemResourceDao.getAllResourceList(1);
+            if(baseResourceList.size() > 0){
+                List<SystemResource> secondResourceList = systemResourceDao.getAllResourceList(2);
                 List<SystemResource> buttonResourceList = null;
                 List<Integer> roleResourceIdList = null;
                 List<Integer> buttonResourcePidList = null;
                 if(secondResourceList.size() > 0){
                     //所有的按钮
-                    buttonResourceList = systemResourceDao.getAllRresourceList(3);
+                    buttonResourceList = systemResourceDao.getAllResourceList(3);
                     //角色对应的资源ID
                     roleResourceIdList = systemResourceDao.getUserResourceIdList(roleId);
                     //所有按钮的PID
                     buttonResourcePidList = systemResourceDao.getButtonResourcePidList();
                 }
-                return buildSystemResourceVOList(baseRresourceList,secondResourceList,buttonResourceList,
-                        roleResourceIdList,buttonResourcePidList);
+                return buildSystemResourceVOList(baseResourceList,secondResourceList,buttonResourceList,roleResourceIdList,buttonResourcePidList);
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -102,7 +100,7 @@ public class SystemResourceImpl implements SystemResourceService {
     @Override
     public int updateRoleAuth(int roleId,List<String> resourceIds) throws Exception {
         systemRoleMapper.deleteResourceByPrimaryKey(roleId);
-        Map<String,Object> paramMap = new HashMap<>();
+        Map<String,Object> paramMap = new HashMap<>(2);
         paramMap.putIfAbsent("roleId",roleId);
         paramMap.putIfAbsent("resourceIds",resourceIds);
         systemRoleMapper.insertSelectiveRoleResource(paramMap);
@@ -112,7 +110,7 @@ public class SystemResourceImpl implements SystemResourceService {
     /**
      * @Author: wangzw
      * @Description: 构建SystemResourceVO
-     * @Param: baseRresourceList 一级菜单
+     * @Param: baseResourceList 一级菜单
      * @Param: secondResourceList 二级菜单
      * @Param: secondResourceList 按钮
      * @Param: roleResourceIdList 角色对应资源ID
@@ -120,37 +118,37 @@ public class SystemResourceImpl implements SystemResourceService {
      * @Version: 1.0
      * @Date: 2017/10/2 7:32
      */
-    private List<SystemResourceVO> buildSystemResourceVOList(List<SystemResource> baseRresourceList,
-                                                   List<SystemResource> secondResourceList,List<SystemResource> buttonResourceList,
-                                                   List<Integer> roleResourceIdList,List<Integer> buttonResourcePidList) throws Exception{
-        List<SystemResourceVO> systemResourceVOList = new ArrayList<>();
+    private List<SystemResourceVo> buildSystemResourceVOList(List<SystemResource> baseResourceList,
+                                                             List<SystemResource> secondResourceList, List<SystemResource> buttonResourceList,
+                                                             List<Integer> roleResourceIdList, List<Integer> buttonResourcePidList) throws Exception{
+        List<SystemResourceVo> systemResourceVoList = new ArrayList<>();
         try{
-            SystemResourceVO systemResourceVO = null;
+            SystemResourceVo systemResourceVo = null;
             SystemResource baseSystemResource = null ,secondSystemResource = null,buttonSystemResource = null;
-            for (int i = 0; i < baseRresourceList.size(); i++) {
-                systemResourceVO = new SystemResourceVO();
-                baseSystemResource = baseRresourceList.get(i);
-                systemResourceVO.setId(baseSystemResource.getId());
-                systemResourceVO.setResourceName(baseSystemResource.getResourceName());
-                systemResourceVO.setSelect(roleResourceIdList.contains(baseSystemResource.getId()));
-                List<SystemResourceVO.SecondResource> secondResourceListT = new ArrayList<>();
+            for (int i = 0; i < baseResourceList.size(); i++) {
+                systemResourceVo = new SystemResourceVo();
+                baseSystemResource = baseResourceList.get(i);
+                systemResourceVo.setId(baseSystemResource.getId());
+                systemResourceVo.setResourceName(baseSystemResource.getResourceName());
+                systemResourceVo.setSelect(roleResourceIdList.contains(baseSystemResource.getId()));
+                List<SystemResourceVo.SecondResource> secondResourceListT = new ArrayList<>();
                 for (int j = 0; j < secondResourceList.size(); j++) {
                     secondSystemResource = secondResourceList.get(j);
-                    if(secondSystemResource.getPid() > baseSystemResource.getId() || baseSystemResource.getId() != secondSystemResource.getPid()){
+                    if(secondSystemResource.getPid() > baseSystemResource.getId() || baseSystemResource.getId().equals(secondSystemResource.getPid()) == false){
                         continue;
                     }
-                    SystemResourceVO.SecondResource secondResource = systemResourceVO.new SecondResource();
+                    SystemResourceVo.SecondResource secondResource = systemResourceVo.new SecondResource();
                     secondResource.setId(secondSystemResource.getId());
                     secondResource.setResourceName(secondSystemResource.getResourceName());
                     secondResource.setSelect(roleResourceIdList.contains(secondSystemResource.getId()));
                     int indexOf = buttonResourcePidList.indexOf(secondSystemResource.getId());
-                    List<SystemResourceVO.ButtonResource> buttonResourceListT = new ArrayList<>();
+                    List<SystemResourceVo.ButtonResource> buttonResourceListT = new ArrayList<>();
                     for (int k = indexOf;indexOf >= 0 && k < buttonResourceList.size(); k++) {
                         buttonSystemResource = buttonResourceList.get(k);
                         if(buttonSystemResource.getPid() > secondSystemResource.getId()){
                             break;
                         }
-                        SystemResourceVO.ButtonResource buttonResource = systemResourceVO.new ButtonResource();
+                        SystemResourceVo.ButtonResource buttonResource = systemResourceVo.new ButtonResource();
                         buttonResource.setId(buttonSystemResource.getId());
                         buttonResource.setResourceName(buttonSystemResource.getResourceName());
                         buttonResource.setSelect(roleResourceIdList.contains(buttonSystemResource.getId()));
@@ -159,10 +157,10 @@ public class SystemResourceImpl implements SystemResourceService {
                     secondResource.setButtonResourceList(buttonResourceListT);
                     secondResourceListT.add(secondResource);
                 }
-                systemResourceVO.setSecondResourceList(secondResourceListT);
-                systemResourceVOList.add(systemResourceVO);
+                systemResourceVo.setSecondResourceList(secondResourceListT);
+                systemResourceVoList.add(systemResourceVo);
             }
-            return systemResourceVOList;
+            return systemResourceVoList;
         }catch(Exception e){
             e.printStackTrace();
             throw e;

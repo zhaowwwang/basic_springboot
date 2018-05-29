@@ -43,7 +43,7 @@ public interface SystemResourceMapper {
      * @Version: 1.0
      * @Date: 2017/10/1 20:51
      */
-    List<SystemResource> getAllRresourceList(int resoucreType);
+    List<SystemResource> getAllResourceList(int resourcesType);
 
     /**
      * @Author: wangzw

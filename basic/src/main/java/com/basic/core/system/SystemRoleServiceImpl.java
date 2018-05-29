@@ -2,7 +2,7 @@ package com.basic.core.system;
 
 import com.basic.core.api.system.SystemRoleService;
 import com.basic.core.bean.system.SystemRole;
-import com.basic.core.bean.system.SystemUserRoleVO;
+import com.basic.core.bean.system.vo.SystemUserRoleVo;
 import com.basic.core.mapper.system.SystemRoleMapper;
 import com.basic.core.mapper.system.SystemUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,26 +81,24 @@ public class SystemRoleServiceImpl implements SystemRoleService {
     }
 
     @Override
-    public List<SystemUserRoleVO> getUserRoleList(SystemRole systemRoleEntiy, Integer userId) throws Exception {
+    public List<SystemUserRoleVo> getUserRoleList(SystemRole systemRoleEntiy, Integer userId) throws Exception {
         List<SystemRole> systemRoleList = systemRoleDao.getSystemRoleList(systemRoleEntiy);
         List<Integer> userRoleList = systemUserMapper.getUserRoleList(userId);
-        List<SystemUserRoleVO> systemUserRoleVOList = new ArrayList<>();
-        SystemRole systemRole = null;
-        for (int i = 0; i < systemRoleList.size(); i++) {
-            SystemUserRoleVO systemUserRoleVO = new SystemUserRoleVO();
-            systemRole = systemRoleList.get(i);
+        List<SystemUserRoleVo> systemUserRoleVOList = new ArrayList<>();
+        systemRoleList.forEach(systemRole -> {
+            SystemUserRoleVo systemUserRoleVO = new SystemUserRoleVo();
             systemUserRoleVO.setRoleId(systemRole.getId());
             systemUserRoleVO.setRoleName(systemRole.getRoleName());
             systemUserRoleVO.setSelect(userRoleList.contains(systemRole.getId()));
             systemUserRoleVOList.add(systemUserRoleVO);
-        }
+        });
         return systemUserRoleVOList;
     }
 
     @Override
     public int insertSelectiveUserRole(Integer userId,List<String> roleIds) {
         systemRoleDao.deleteRoleByUserId(userId);
-        Map<String,Object> paramMap = new HashMap<>();
+        Map<String,Object> paramMap = new HashMap<>(2);
         paramMap.putIfAbsent("userId",userId);
         paramMap.putIfAbsent("roleIds",roleIds);
         return systemRoleDao.insertSelectiveUserRole(paramMap);

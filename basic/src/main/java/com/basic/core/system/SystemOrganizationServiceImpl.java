@@ -13,7 +13,6 @@ import java.util.List;
  * @Description: 系统部门服务接口实现
  * @Version: 1.0
  */
-
 @Service
 public class SystemOrganizationServiceImpl implements SystemOrganizationService {
 
