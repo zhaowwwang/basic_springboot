@@ -3,6 +3,7 @@ package com.basic.core.util;
 import java.math.BigDecimal;
 
 /**
+ * 精度的运算工具
  * @Author: wangzw
  * @Date: 2017/11/28 10:14
  * @Description:

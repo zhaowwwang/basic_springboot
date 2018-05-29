@@ -18,7 +18,8 @@ public class GetIpTools {
 		try {
 			Enumeration netInterfaces = NetworkInterface.getNetworkInterfaces();
 			InetAddress ip = null;
-			boolean finded = false;// 是否找到外网IP
+			//是否找到外网IP
+			boolean finded = false;
 			while (netInterfaces.hasMoreElements() && !finded) {
 				NetworkInterface ni = (NetworkInterface) netInterfaces.nextElement();
 				Enumeration address = ni.getInetAddresses();
