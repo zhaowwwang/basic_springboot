@@ -1,3 +1,8 @@
+/**
+ * 获取随机数
+ * @returns {number}
+ * @constructor
+ */
 function RandomNumBoth(){
     var Max = 5;
     var Min = 1;
@@ -7,7 +12,13 @@ function RandomNumBoth(){
     return num;
 }
 
-//iframe层-父子操作
+/**
+ * 增加iframe层-父子操作
+ * @param titleName 页面title名称
+ * @param contentUrl 需要打开的页面地址
+ * @param width 页面宽度
+ * @param height 页面高度
+ */
 function addIframe(titleName,contentUrl,width,height){
     if(width == null){
         width="60%";
@@ -26,8 +37,11 @@ function addIframe(titleName,contentUrl,width,height){
     });
 }
 
-//增加或更新的通用方法
-function addAndUpdateUtil(url,id,object){
+/**
+ * 校验id为object 所有的input
+ * 判断属性 required 是否为true,如果是判断是否为空
+ */
+function checkInputRequired(object){
     var inputs = $('#'+ object +' input');
     for(var i = 0; i < inputs.length; i++){
         if($(inputs[i]).prop("required") && !$(inputs[i]).val()){
@@ -38,9 +52,18 @@ function addAndUpdateUtil(url,id,object){
                 bg : '#AE81FF',
                 time : 2
             });
-            return;
+            break;
         }
     }
+}
+/**
+ * 增加或更新的通用方法
+ * @param url 请求的url地址
+ * @param id
+ * @param object 页面中需要提交的from的ID
+ */
+function addAndUpdateUtil(url,id,object){
+    checkInputRequired(object);
     $.ajax({
         type : 'post',
         url : url,
@@ -56,6 +79,13 @@ function addAndUpdateUtil(url,id,object){
         }
     })
 }
+
+/**
+ * 序列化$container所有input,select,textarea的key和val
+ * @param $container
+ * @param id
+ * @returns {{}}
+ */
 function serParam($container,id) {
     var obj = {};
     if(id!=null){obj["id"] = id;}
@@ -67,7 +97,13 @@ function serParam($container,id) {
     });
     return obj;
 }
-//根据ID删除的通用方法
+
+/**
+ * 根据ID删除的通用方法
+ * @param url
+ * @param id
+ * @param alertVal
+ */
 function updateDataById(url, id, alertVal){
     alertVal = alertVal!=null ? alertVal :"确定删除？";
     layer.confirm(alertVal,
@@ -159,6 +195,7 @@ $('#dataBodyList').on('click', function (e){
 });
 
 /**
+ * 上传文件
  * @Author: wangzw
  * @Description: 
  * @Version: 1.0
@@ -197,7 +234,7 @@ $('#fileTable').on('change', function(e) {
 
 /**
  * @Author: wangzw
- * @Description: 查詢
+ * @Description: 页面查询
  * @Version: 1.0
  * @Date: 2017/11/19 11:23
  */
